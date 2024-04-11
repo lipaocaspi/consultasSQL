@@ -58,47 +58,207 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
 
    4. Lista el nombre de los productos, el precio en euros y el precio en dólares estadounidenses (USD).
 
+      ```sql
+      SELECT nombre, precio, (precio*1.07) FROM producto;
+      ```
+
+      
+
    5. Lista el nombre de los productos, el precio en euros y el precio en dólares estadounidenses (USD). Utiliza los siguientes alias para las columnas: nombre de producto, euros, dólares.
+
+      ```sql
+      SELECT nombre AS nombre_de_producto, precio AS euros, (precio*1.07) AS dolares FROM producto;
+      ```
+
+      
 
    6. Lista los nombres y los precios de todos los productos de la tabla *producto*, convirtiendo los nombres a mayúscula.
 
+      ```sql
+      SELECT UPPER(nombre), precio FROM producto;
+      ```
+
+      
+
    7. Lista los nombres y los precios de todos los productos de la tabla *producto*, convirtiendo los nombres a minúscula.
+
+      ```sql
+      SELECT LOWER(nombre), precio FROM producto;
+      ```
+
+      
 
    8. Lista el nombre de todos los fabricantes en una columna, y en otra columna obtenga en mayúsculas los dos primeros caracteres del nombre del fabricante.
 
+      ```sql
+      
+      ```
+
+      
+
    9. Lista los nombres y los precios de todos los productos de la tabla *producto*, redondeando el valor del precio.
+
+      ```sql
+      SELECT nombre, ROUND(precio, -1) FROM producto;
+      ```
+
+      
 
    10. Lista los nombres y los precios de todos los productos de la tabla *producto*, truncando el valor del precio para mostrarlo sin ninguna cifra decimal.
 
+       ```sql
+       SELECT nombre, TRUNCATE(precio, 0) FROM producto;
+       ```
+
+       
+
    11. Lista el identificador de los fabricantes que tienen productos en la tabla *producto*.
+
+       ```sql
+       SELECT f.codigo
+       FROM fabricante AS f, producto AS p
+       WHERE f.codigo = p.codigo_fabricante;
+       ```
+
+       
 
    12. Lista el identificador de los fabricantes que tienen productos en la tabla *producto*, eliminando los identificadores que aparecen repetidos.
 
+       ```sql
+       
+       ```
+
+       
+
    13. Lista los nombres de los fabricantes ordenados de forma ascendente.
+
+       ```sql
+       SELECT nombre 
+       FROM fabricante 
+       ORDER BY nombre ASC;
+       ```
+
+       
 
    14. Lista los nombres de los fabricantes ordenados de forma descendente.
 
+       ```sql
+       SELECT nombre 
+       FROM fabricante 
+       ORDER BY nombre DESC;
+       ```
+
+       
+
    15. Lista los nombres de los productos ordenados en primer lugar por el nombre de forma ascendente y en segundo lugar por el precio de forma descendente.
+
+       ```sql
+       SELECT nombre
+       FROM productos
+       ORDER BY nombre ASC, precio DESC;
+       ```
+
+       
 
    16. Devuelve una lista con las 5 primeras filas de la tabla *fabricante*.
 
+       ```sql
+       SELECT codigo, nombre
+       FROM fabricante
+       LIMIT 5;
+       ```
+
+       
+
    17. Devuelve una lista con 2 filas a partir de la cuarta fila de la tabla *fabricante*. La cuarta fila también se debe incluir en la respuesta.
+
+       ```sql
+       
+       ```
+
+       
 
    18. Lista el nombre y el precio del producto más barato. (Utilice solamente las cláusulas ORDER BY y LIMIT)
 
+       ```sql
+       SELECT nombre, precio
+       FROM producto
+       ORDER BY precio DESC
+       LIMIT 1;
+       ```
+
+       
+
    19. Lista el nombre y el precio del producto más caro. (Utilice solamente las cláusulas ORDER BY y LIMIT)
+
+       ```sql
+       SELECT nombre, precio
+       FROM producto
+       ORDER BY precio ASC
+       LIMIT 1;
+       ```
+
+       
 
    20. Lista el nombre de todos los productos del fabricante cuyo identificador de fabricante es igual a 2.
 
+       ```sql
+       SELECT p.nombre
+       FROM fabricante AS f, producto AS p
+       WHERE f.codigo = p.codigo_fabricante AND f.codigo = 2;
+       ```
+
+       
+
    21. Lista el nombre de los productos que tienen un precio menor o igual a 120€.
+
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE precio <= 120;
+       ```
+
+       
 
    22. Lista el nombre de los productos que tienen un precio mayor o igual a 400€.
 
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE precio >= 400;
+       ```
+
+       
+
    23. Lista el nombre de los productos que no tienen un precio mayor o igual a 400€.
+
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE precio < 400;
+       ```
+
+       
 
    24. Lista todos los productos que tengan un precio entre 80€ y 300€. Sin utilizar el operador BETWEEN.
 
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE precio >= 80 AND precio <= 300;
+       ```
+
+       
+
    25. Lista todos los productos que tengan un precio entre 60€ y 200€. Utilizando el operador BETWEEN.
+
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE precio BETWEEN 60 AND 200;
+       ```
+
+       
 
    26. Lista todos los productos que tengan un precio mayor que 200€ y que el identificador de fabricante sea igual a 6.
 
@@ -125,6 +285,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    
 
 3. **Consultas multitabla**
+
    1. Devuelve una lista con el nombre del producto, precio y nombre de fabricante de todos los productos de la base de datos.
    2. Devuelve una lista con el nombre del producto, precio y nombre de fabricante de todos los productos de la base de datos. Ordene el resultado por el nombre del fabricante, por orden alfabético.
    3. Devuelve una lista con el identificador del producto, nombre del producto, identificador del fabricante y nombre del fabricante, de todos los productos de la base de datos.
