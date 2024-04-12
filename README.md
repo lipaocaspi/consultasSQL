@@ -91,7 +91,8 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    8. Lista el nombre de todos los fabricantes en una columna, y en otra columna obtenga en mayúsculas los dos primeros caracteres del nombre del fabricante.
 
       ```sql
-      
+      SELECT nombre, UPPER(SUBSTRING(nombre, 1, 2)) AS NOmbre
+      FROM fabricante;
       ```
 
       
@@ -99,7 +100,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    9. Lista los nombres y los precios de todos los productos de la tabla *producto*, redondeando el valor del precio.
 
       ```sql
-      SELECT nombre, ROUND(precio, -1) FROM producto;
+      SELECT nombre, ROUND(precio, 0) FROM producto;
       ```
 
       
@@ -125,7 +126,9 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    12. Lista el identificador de los fabricantes que tienen productos en la tabla *producto*, eliminando los identificadores que aparecen repetidos.
 
        ```sql
-       
+       SELECT DISTINCT f.codigo
+       FROM fabricante AS f, producto AS p
+       WHERE f.codigo = p.codigo_fabricante;
        ```
 
        
@@ -154,7 +157,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
 
        ```sql
        SELECT nombre
-       FROM productos
+       FROM producto
        ORDER BY nombre ASC, precio DESC;
        ```
 
@@ -173,7 +176,10 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    17. Devuelve una lista con 2 filas a partir de la cuarta fila de la tabla *fabricante*. La cuarta fila también se debe incluir en la respuesta.
 
        ```sql
-       
+       SELECT codigo, nombre 
+       FROM fabricante
+       LIMIT 2
+       OFFSET 3;
        ```
 
        
@@ -183,7 +189,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
        ```sql
        SELECT nombre, precio
        FROM producto
-       ORDER BY precio DESC
+       ORDER BY precio ASC
        LIMIT 1;
        ```
 
@@ -194,7 +200,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
        ```sql
        SELECT nombre, precio
        FROM producto
-       ORDER BY precio ASC
+       ORDER BY precio DESC
        LIMIT 1;
        ```
 
@@ -262,25 +268,113 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
 
    26. Lista todos los productos que tengan un precio mayor que 200€ y que el identificador de fabricante sea igual a 6.
 
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE precio > 200 AND codigo_fabricante = 6;
+       ```
+
+       
+
    27. Lista todos los productos donde el identificador de fabricante sea 1, 3 o 5. Sin utilizar el operador IN.
+
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE codigo_fabricante = 1 OR codigo_fabricante = 3 OR codigo_fabricante = 5;
+       ```
+
+       
 
    28. Lista todos los productos donde el identificador de fabricante sea 1, 3 o 5. Utilizando el operador IN.
 
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE codigo_fabricante IN (1, 3, 5);
+       ```
+
+       
+
    29. Lista el nombre y el precio de los productos en céntimos (Habrá que multiplicar por 100 el valor del precio). Cree un alias para la columna que contiene el precio que se llame céntimos.
+
+       ```sql
+       SELECT nombre, precio, (precio*100) AS centimos
+       FROM producto;
+       ```
+
+       
 
    30. Lista los nombres de los fabricantes cuyo nombre empiece por la letra S.
 
+       ```sql
+       SELECT nombre
+       FROM fabricante
+       WHERE nombre LIKE 'S%';
+       ```
+
+       
+
    31. Lista los nombres de los fabricantes cuyo nombre termine por la vocal e.
+
+       ```sql
+       SELECT nombre
+       FROM fabricante
+       WHERE nombre LIKE '%e';
+       ```
+
+       
 
    32. Lista los nombres de los fabricantes cuyo nombre contenga el carácter w.
 
+       ```sql
+       SELECT nombre
+       FROM fabricante
+       WHERE nombre LIKE '%w%';
+       ```
+
+       
+
    33. Lista los nombres de los fabricantes cuyo nombre sea de 4 caracteres.
+
+       ```sql
+       SELECT nombre
+       FROM fabricante
+       WHERE LENGTH(nombre) = 4;
+       ```
+
+       
 
    34. Devuelve una lista con el nombre de todos los productos que contienen la cadena Portátil en el nombre.
 
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE nombre LIKE '%Portátil%';
+       ```
+
+       
+
    35. Devuelve una lista con el nombre de todos los productos que contienen la cadena Monitor en el nombre y tienen un precio inferior a 215 €.
 
+       ```sql
+       SELECT nombre
+       FROM producto
+       WHERE nombre LIKE '%Monitor%' AND precio < 215;
+       ```
+
+       
+
    36. Lista el nombre y el precio de todos los productos que tengan un precio mayor o igual a 180€. Ordene el resultado en primer lugar por el precio (en orden descendente) y en segundo lugar por el nombre (en orden ascendente).
+
+       ```sql
+       SELECT nombre, precio
+       FROM producto
+       WHERE precio >= 180
+       ORDER BY precio DESC, nombre ASC;
+       ```
+
+       
 
    
 
