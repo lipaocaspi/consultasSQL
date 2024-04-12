@@ -13,8 +13,8 @@
 /* 7. */
 /*SELECT LOWER(nombre), precio FROM producto;*/
 /* 8. */
-SELECT nombre, UPPER(SUBSTRING(nombre, 1, 2)) AS NOmbre
-FROM fabricante;
+/*SELECT nombre, UPPER(SUBSTRING(nombre, 1, 2)) AS NOmbre
+FROM fabricante;*/
 /* 9. */
 /*SELECT nombre, ROUND(precio, 0) FROM producto;*/
 /* 10. */
