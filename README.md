@@ -385,7 +385,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    1. Devuelve una lista con el nombre del producto, precio y nombre de fabricante de todos los productos de la base de datos.
    
       ```sql
-      SELECT p.nombre, p.precio, f.nombre
+      SELECT p.nombre, p.precio, f.nombre AS nombre_fabricante
       FROM producto AS p, fabricante AS f
       WHERE p.codigo_fabricante = f.codigo;
       ```
@@ -402,7 +402,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    3. Devuelve una lista con el identificador del producto, nombre del producto, identificador del fabricante y nombre del fabricante, de todos los productos de la base de datos.
    
       ```sql
-      SELECT p.codigo, p.nombre, f.codigo, f.nombre
+      SELECT p.codigo, p.nombre, f.codigo AS codigo_fabricante, f.nombre as nombre_fabricante
       FROM producto AS p, fabricante AS f
       WHERE p.codigo_fabricante = f.codigo;
       ```
@@ -410,14 +410,14 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    4. Devuelve el nombre del producto, su precio y el nombre de su fabricante, del producto más barato.
    
       ```sql
-      SELECT p.nombre, MIN(p.precio), f.nombre
+      SELECT p.nombre, MIN(p.precio) AS precio, f.nombre AS nombre_fabricante
       FROM producto AS p, fabricante AS f;
       ```
    
    5. Devuelve el nombre del producto, su precio y el nombre de su fabricante, del producto más caro.
    
       ```sql
-      SELECT p.nombre, MAX(p.precio), f.nombre
+      SELECT p.nombre, MAX(p.precio) as precio, f.nombre AS nombre_fabricante
       FROM producto AS p, fabricante AS f;
       ```
    
@@ -477,10 +477,10 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    12. Devuelve un listado con el nombre de producto, precio y nombre de fabricante, de todos los productos que tengan un precio mayor o igual a 180€. Ordene el resultado en primer lugar por el precio (en orden descendente) y en segundo lugar por el nombre (en orden ascendente).
    
        ```sql
-       SELECT p.nombre, p.precio, f.nombre
+       SELECT p.nombre, p.precio, f.nombre AS nombre_fabricante
        FROM producto AS p, fabricante AS f
        WHERE p.codigo_fabricante = f.codigo AND p.precio >= 180
-       ORDER BY p.precio DESC, p.nombre DESC;
+       ORDER BY p.precio DESC, p.nombre ASC;
        ```
    
        
