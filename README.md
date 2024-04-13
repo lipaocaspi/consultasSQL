@@ -1,5 +1,3 @@
-![SQL](https://raw.githubusercontent.com/David-Albarracin/README_MATERIALS/main/sql.png)
-
 #### Consultas SQL
 
 1. **Inserción de datos**
@@ -69,7 +67,8 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    5. Lista el nombre de los productos, el precio en euros y el precio en dólares estadounidenses (USD). Utiliza los siguientes alias para las columnas: nombre de producto, euros, dólares.
 
       ```sql
-      SELECT nombre AS nombre_de_producto, precio AS euros, (precio*1.07) AS dolares FROM producto;
+      SELECT nombre AS nombre_de_producto, precio AS euros, (precio*1.07) AS dolares 
+      FROM producto;
       ```
 
       
@@ -393,7 +392,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    2. Devuelve una lista con el nombre del producto, precio y nombre de fabricante de todos los productos de la base de datos. Ordene el resultado por el nombre del fabricante, por orden alfabético.
    
       ```sql
-      SELECT p.nombre, p.precio, f.nombre
+      SELECT p.nombre, p.precio, f.nombre AS nombre_fabricante
       FROM producto AS p, fabricante AS f
       WHERE p.codigo_fabricante = f.codigo
       ORDER BY f.nombre ASC;
@@ -411,14 +410,16 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    
       ```sql
       SELECT p.nombre, MIN(p.precio) AS precio, f.nombre AS nombre_fabricante
-      FROM producto AS p, fabricante AS f;
+      FROM producto AS p, fabricante AS f
+      WHERE p.codigo_fabricante = f.codigo;
       ```
    
    5. Devuelve el nombre del producto, su precio y el nombre de su fabricante, del producto más caro.
    
       ```sql
       SELECT p.nombre, MAX(p.precio) as precio, f.nombre AS nombre_fabricante
-      FROM producto AS p, fabricante AS f;
+      FROM producto AS p, fabricante AS f
+      WHERE p.codigo_fabricante = f.codigo;
       ```
    
    6. Devuelve una lista de todos los productos del fabricante Lenovo.
@@ -437,7 +438,6 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
       WHERE p.codigo_fabricante = f.codigo AND f.nombre = 'Crucial' AND p.precio > 200;
       ```
    
-      
    8. Devuelve un listado con todos los productos de los fabricantes Asus, Hewlett-Packard y Seagate. Sin utilizar el operador IN.
    
       ```sql
@@ -446,7 +446,6 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
       WHERE p.codigo_fabricante = f.codigo AND (f.nombre = 'Asus' OR f.nombre = 'Hewlett-Packard' OR f.nombre = 'Seagate');
       ```
    
-      
    9. Devuelve un listado con todos los productos de los fabricantes Asus, Hewlett-Packard y Seagate. Utilizando el operador IN.
    
       ```sql
@@ -455,7 +454,6 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
       WHERE p.codigo_fabricante = f.codigo AND f.nombre IN ('Asus', 'Hewlett-Packard', 'Seagate');
       ```
    
-      
    10. Devuelve un listado con el nombre y el precio de todos los productos de los fabricantes cuyo nombre termine por la vocal e.
    
        ```sql
@@ -464,7 +462,6 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
        WHERE p.codigo_fabricante = f.codigo AND f.nombre LIKE '%e';
        ```
    
-       
    11. Devuelve un listado con el nombre y el precio de todos los productos cuyo nombre de fabricante contenga el carácter w en su nombre.
    
        ```sql
@@ -473,7 +470,6 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
        WHERE p.codigo_fabricante = f.codigo AND f.nombre LIKE '%w%';
        ```
    
-       
    12. Devuelve un listado con el nombre de producto, precio y nombre de fabricante, de todos los productos que tengan un precio mayor o igual a 180€. Ordene el resultado en primer lugar por el precio (en orden descendente) y en segundo lugar por el nombre (en orden ascendente).
    
        ```sql
@@ -483,11 +479,10 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
        ORDER BY p.precio DESC, p.nombre ASC;
        ```
    
-       
    13. Devuelve un listado con el identificador y el nombre de fabricante, solamente de aquellos fabricantes que tienen productos asociados en la base de datos.
    
        ```sql
-       SELECT f.codigo, f.nombre
+       SELECT DISTINCT(f.codigo), f.nombre
        FROM producto AS p, fabricante AS f
        WHERE p.codigo_fabricante = f.codigo;
        ```
