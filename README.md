@@ -92,7 +92,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    8. Lista el nombre de todos los fabricantes en una columna, y en otra columna obtenga en mayúsculas los dos primeros caracteres del nombre del fabricante.
 
       ```sql
-      SELECT nombre, UPPER(SUBSTRING(nombre, 1, 2)) AS NOmbre
+      SELECT nombre, UPPER(SUBSTRING(nombre, 1, 2)) AS NO
       FROM fabricante;
       ```
 
@@ -109,7 +109,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    10. Lista los nombres y los precios de todos los productos de la tabla *producto*, truncando el valor del precio para mostrarlo sin ninguna cifra decimal.
 
        ```sql
-       SELECT nombre, TRUNCATE(precio, 0) FROM producto;
+       SELECT nombre, TRUNC(precio) FROM producto;
        ```
 
        
@@ -117,23 +117,21 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    11. Lista el identificador de los fabricantes que tienen productos en la tabla *producto*.
 
        ```sql
-       SELECT f.codigo
-       FROM fabricante AS f, producto AS p
-       WHERE f.codigo = p.codigo_fabricante;
+       SELECT codigo_fabricante
+       FROM producto;
        ```
-
        
-
+       
+       
    12. Lista el identificador de los fabricantes que tienen productos en la tabla *producto*, eliminando los identificadores que aparecen repetidos.
 
        ```sql
-       SELECT DISTINCT f.codigo
-       FROM fabricante AS f, producto AS p
-       WHERE f.codigo = p.codigo_fabricante;
+       SELECT DISTINCT codigo_fabricante
+       FROM producto;
        ```
-
        
-
+       
+       
    13. Lista los nombres de los fabricantes ordenados de forma ascendente.
 
        ```sql
@@ -210,9 +208,9 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    20. Lista el nombre de todos los productos del fabricante cuyo identificador de fabricante es igual a 2.
 
        ```sql
-       SELECT p.nombre
-       FROM fabricante AS f, producto AS p
-       WHERE f.codigo = p.codigo_fabricante AND f.codigo = 2;
+       SELECT nombre
+       FROM producto
+       WHERE codigo_fabricante = 2;
        ```
 
        
@@ -242,7 +240,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
        ```sql
        SELECT nombre
        FROM producto
-       WHERE precio < 400;
+       WHERE NOT precio >= 400;
        ```
 
        
@@ -300,7 +298,7 @@ VALUES (1, 'Disco duro SATA3 1TB', 86.99, 5),
    29. Lista el nombre y el precio de los productos en céntimos (Habrá que multiplicar por 100 el valor del precio). Cree un alias para la columna que contiene el precio que se llame céntimos.
 
        ```sql
-       SELECT nombre, precio, (precio*100) AS centimos
+       SELECT nombre, (precio*100) AS céntimos
        FROM producto;
        ```
 
